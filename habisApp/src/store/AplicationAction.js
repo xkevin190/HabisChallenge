@@ -92,6 +92,11 @@ export const createNewOrder = (order, callback) => async (dispatch) => {
   })
 }
 
+/**
+ * error handler in http requests
+ * @param {Object} err error
+ * @param {()=> void} dispatch Action dispatch
+ */
 const errorMessage = async (err, dispatch) => {
 
   if (err.response) {
@@ -104,6 +109,11 @@ const errorMessage = async (err, dispatch) => {
   }
 }
 
+
+/**
+ * this action makes the requests of the orders to the server
+ * @param {()=> void} dispatch  Action dispatch
+ */
 export const getOrder = async (dispatch) => {
   try {
     const order = await axios.get('https://order-pizza-api.herokuapp.com/api/orders',)
@@ -133,6 +143,9 @@ export const deleteOrder = (id, callback) => (dispatch) => {
   })
 }
 
+/**
+ * action used to log out
+ */
 export const signOff = () => async (dispatch) => {
   await AsyncStorage.removeItem('token');
   dispatch({
@@ -141,7 +154,10 @@ export const signOff = () => async (dispatch) => {
   });
 }
 
-
+/**
+ * loading action is when executing opens or closes a spinner
+ * @param {boolean} loading  loading option
+ */
 const loading = (loading) => {
   return {
     type: ActionTypes.LOADING,

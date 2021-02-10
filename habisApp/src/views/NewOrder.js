@@ -69,7 +69,7 @@ class NewOrder extends Component {
       Size: this.state.size,
       Table_No: Number(this.state.tableNo),
       Timestamp: new Date().toISOString(),
-      Order_ID: navigation.state.params.order
+      Order_ID: this.props.order.length
     }
 
     this.props.createNewOrder(sendObject, () => {
@@ -88,7 +88,7 @@ class NewOrder extends Component {
     const { navigation } = this.props
     const { size, crustButton } = this.state
 
-    const arrayPicker = ['1', '2', '3', '4']
+    const arrayPicker = ['1', '2', '3', '4', '5', '6', '7']
     const windowHeight = Dimensions.get('window');
 
     return (
@@ -263,7 +263,9 @@ class NewOrder extends Component {
   }
 }
 
-export default connect(null, { createNewOrder })(NewOrder)
+const mapStateToProps = (state) => state.app
+
+export default connect(mapStateToProps, { createNewOrder })(NewOrder)
 
 
 const styles = StyleSheet.create({
