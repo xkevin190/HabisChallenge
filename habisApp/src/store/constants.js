@@ -5,5 +5,6 @@ export const ActionTypes = {
   AUTH: '@@aplication/AUTH',
   GET_ORDER: '@@aplication/GET_ORDER',
   DELETE_ORDER: '@@aplication/DELETE_ORDER',
-  CREATE_ORDER: '@@aplication/CREATE_ORDERs'
+  CREATE_ORDER: '@@aplication/CREATE_ORDER',
+  LOADING: '@@aplication/LOADING'
 };

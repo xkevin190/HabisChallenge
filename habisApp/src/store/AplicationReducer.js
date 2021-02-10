@@ -2,8 +2,9 @@
 import { ActionTypes } from './constants';
 
 const AplicationState = {
-  auth: false,
-  order: []
+  auth: 0,
+  order: [],
+  loading: false
 };
 
 export const AplicationReducer = (state = AplicationState, action) => {
@@ -27,6 +28,11 @@ export const AplicationReducer = (state = AplicationState, action) => {
     }
     case ActionTypes.CREATE_ORDER: {
       return { ...state, order: state.order.concat(action.payload) }
+    }
+
+    case ActionTypes.LOADING: {
+
+      return { ...state, loading: action.payload }
     }
     default: {
       return state;

@@ -98,165 +98,165 @@ class NewOrder extends Component {
           <View style={windowHeight.height > 650 ? { height: '50%' } : { height: '30%' }} >
             <ImageBackground source={navigation.state.params.image} style={styles.imageBackground}>
 
-            <Button transparent style={styles.buttonsStyle} onPress={this.handleBack}>
-              <Icon style={styles.iconStyle} name="close" />
-            </Button>
+              <Button transparent style={styles.buttonsStyle} onPress={this.handleBack}>
+                <Icon style={styles.iconStyle} name="close" />
+              </Button>
 
-            <Button transparent
-              onPress={() => this.props.navigation.navigate('orders')}
-              style={styles.buttonsStyle}
-            >
-              <Icon style={styles.iconStyle} name="pizza" />
-            </Button>
+              <Button transparent
+                // onPress={() => this.props.navigation.navigate('orders')}
+                style={styles.buttonsStyle}
+              >
+                {/* <Icon style={styles.iconStyle} name="pizza" /> */}
+              </Button>
 
-          </ImageBackground>
-        </View>
-
-        <View style={{ height: '100%' }}>
-
-          <View style={styles.titleStyle}>
-            <Text style={styles.textStyle}>{navigation.state.params.flavor}</Text>
+            </ImageBackground>
           </View>
-          <View>
-            <Text style={{ paddingHorizontal: 25, paddingTop: 10 }}>
-              Crust:
+
+          <View style={{ height: '100%' }}>
+
+            <View style={styles.titleStyle}>
+              <Text style={styles.textStyle}>{navigation.state.params.flavor}</Text>
+            </View>
+            <View>
+              <Text style={{ paddingHorizontal: 25, paddingTop: 10 }}>
+                Crust:
             </Text>
-          </View>
-          <View style={styles.buttonContainer}>
-            <Button
-              onPress={() => { this.selectCrust('THIN') }}
-              style={
-                crustButton === 'THIN' ?
-                  styles.styleButtonSizeSelected :
-                  styles.styleButtonSize}
-              bordered
-            >
-              <Text style={
-                crustButton === 'THIN' ?
-                  styles.textButtonSelected :
-                  styles.textButton
-              }
-              >Thin</Text>
-            </Button>
-            <Button
-              onPress={() => { this.selectCrust('NORMAL') }}
-              style={
-                crustButton === 'NORMAL' ?
-                  styles.styleButtonSizeSelected :
-                  styles.styleButtonSize
-              }
-              bordered
-            >
-              <Text style={
-                crustButton === 'NORMAL' ?
-                  styles.textButtonSelected :
-                  styles.textButton
-              }
-              >Normal</Text>
-            </Button>
-            <Button
-              onPress={() => { this.selectCrust('THICK') }}
-              style={crustButton === 'THICK' ?
-                styles.styleButtonSizeSelected :
-                styles.styleButtonSize}
-              bordered
-              success
-            >
-              <Text
+            </View>
+            <View style={styles.buttonContainer}>
+              <Button
+                onPress={() => { this.selectCrust('THIN') }}
                 style={
-                  crustButton === 'THICK' ?
+                  crustButton === 'THIN' ?
+                    styles.styleButtonSizeSelected :
+                    styles.styleButtonSize}
+                bordered
+              >
+                <Text style={
+                  crustButton === 'THIN' ?
                     styles.textButtonSelected :
                     styles.textButton
                 }
-              >Thick</Text>
-            </Button>
-          </View>
-          <View>
-            <Text style={{ paddingHorizontal: 25, paddingTop: 10 }}>
-              Size:
-            </Text>
-          </View>
-          <View style={styles.buttonContainer}>
-            <Button
-              onPress={() => { this.selectSize('S') }}
-              style={
-                size === 'S' ?
+                >Thin</Text>
+              </Button>
+              <Button
+                onPress={() => { this.selectCrust('NORMAL') }}
+                style={
+                  crustButton === 'NORMAL' ?
+                    styles.styleButtonSizeSelected :
+                    styles.styleButtonSize
+                }
+                bordered
+              >
+                <Text style={
+                  crustButton === 'NORMAL' ?
+                    styles.textButtonSelected :
+                    styles.textButton
+                }
+                >Normal</Text>
+              </Button>
+              <Button
+                onPress={() => { this.selectCrust('THICK') }}
+                style={crustButton === 'THICK' ?
                   styles.styleButtonSizeSelected :
                   styles.styleButtonSize}
-              bordered light
-            >
-              <Text
+                bordered
+                success
+              >
+                <Text
+                  style={
+                    crustButton === 'THICK' ?
+                      styles.textButtonSelected :
+                      styles.textButton
+                  }
+                >Thick</Text>
+              </Button>
+            </View>
+            <View>
+              <Text style={{ paddingHorizontal: 25, paddingTop: 10 }}>
+                Size:
+            </Text>
+            </View>
+            <View style={styles.buttonContainer}>
+              <Button
+                onPress={() => { this.selectSize('S') }}
                 style={
                   size === 'S' ?
-                    styles.textButtonSelected :
-                    styles.textButton
-                }
-              >Small</Text>
-            </Button>
-            <Button
-              onPress={() => { this.selectSize('M') }}
-              style={
-                size === 'M' ?
-                  styles.styleButtonSizeSelected :
-                  styles.styleButtonSize}
-              bordered
-            >
-              <Text
+                    styles.styleButtonSizeSelected :
+                    styles.styleButtonSize}
+                bordered light
+              >
+                <Text
+                  style={
+                    size === 'S' ?
+                      styles.textButtonSelected :
+                      styles.textButton
+                  }
+                >Small</Text>
+              </Button>
+              <Button
+                onPress={() => { this.selectSize('M') }}
                 style={
                   size === 'M' ?
-                    styles.textButtonSelected :
-                    styles.textButton
-                }
-              >Medium</Text>
-            </Button>
-            <Button
-              onPress={() => { this.selectSize('L') }}
-              style={
-                size === 'L' ?
-                  styles.styleButtonSizeSelected :
-                  styles.styleButtonSize}
-              bordered success
-            >
-              <Text
+                    styles.styleButtonSizeSelected :
+                    styles.styleButtonSize}
+                bordered
+              >
+                <Text
+                  style={
+                    size === 'M' ?
+                      styles.textButtonSelected :
+                      styles.textButton
+                  }
+                >Medium</Text>
+              </Button>
+              <Button
+                onPress={() => { this.selectSize('L') }}
                 style={
                   size === 'L' ?
-                    styles.textButtonSelected :
-                    styles.textButton
-                }
-              >Big</Text>
-            </Button>
-          </View>
+                    styles.styleButtonSizeSelected :
+                    styles.styleButtonSize}
+                bordered success
+              >
+                <Text
+                  style={
+                    size === 'L' ?
+                      styles.textButtonSelected :
+                      styles.textButton
+                  }
+                >Big</Text>
+              </Button>
+            </View>
 
-          <View>
-            <View style={{ flexDirection: 'row', paddingTop: 10 }}>
-              <Text style={{ paddingHorizontal: 25, paddingTop: 17 }}>
-                Table Nro:
+            <View>
+              <View style={{ flexDirection: 'row', paddingTop: 10 }}>
+                <Text style={{ paddingHorizontal: 25, paddingTop: 17 }}>
+                  Table Nro:
               </Text>
-              <View style={{ width: '30%' }}>
-                <Picker
-                  mode="dropdown"
-                  selectedValue={this.state.tableNo}
-                  onValueChange={this.onTableValue}
-                >
-                  {arrayPicker.map((table) => (
-                    <Picker.Item
-                      key={table}
-                      label={table}
-                      value={table}
-                    />
-                  ))}
-                </Picker>
+                <View style={{ width: '30%' }}>
+                  <Picker
+                    mode="dropdown"
+                    selectedValue={this.state.tableNo}
+                    onValueChange={this.onTableValue}
+                  >
+                    {arrayPicker.map((table) => (
+                      <Picker.Item
+                        key={table}
+                        label={table}
+                        value={table}
+                      />
+                    ))}
+                  </Picker>
+                </View>
               </View>
             </View>
+            <View style={{ height: 50, width: "100%", paddingHorizontal: '5%', marginTop: 10 }}>
+              <ButonComponent
+                title="ORDER NOW"
+                type="primary"
+                handleSubmit={this.handleSubmit}
+              />
+            </View>
           </View>
-          <View style={{ height: 50, width: "100%", paddingHorizontal: '5%', marginTop: 10 }}>
-            <ButonComponent
-              title="ORDER NOW"
-              type="primary"
-              handleSubmit={this.handleSubmit}
-            />
-          </View>
-        </View>
         </View >
       </ScrollView >
     );
@@ -275,7 +275,7 @@ const styles = StyleSheet.create({
   },
 
   buttonsStyle: {
-    paddingTop: 50,
+    marginTop: 20,
   },
 
   textButton: {

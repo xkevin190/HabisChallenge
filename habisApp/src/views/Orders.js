@@ -50,7 +50,6 @@ class Orders extends Component {
   }
 
   render() {
-    console.log(this.props.order)
     return (
       <View style={{ flex: 1 }}>
         <Header title='Orders' navigation={this.props.navigation} back={this.handleBack} />

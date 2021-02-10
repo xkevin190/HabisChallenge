@@ -6,7 +6,7 @@ export default class componentName extends Component {
     super(props);
     this.state = {};
   }
-
+  
   render() {
     const {title, type, handleSubmit} = this.props;
     const color = {

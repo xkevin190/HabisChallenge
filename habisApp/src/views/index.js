@@ -4,6 +4,7 @@ import Auth from './auth';
 import { connect } from 'react-redux';
 import { logout, signOff } from '../store/AplicationAction';
 import Home from './Home';
+import Spinner from '../components/spinner'
 class DualApp extends PureComponent {
   constructor(props) {
     super(props);
@@ -20,8 +21,9 @@ class DualApp extends PureComponent {
   render() {
     return (
       <View>
-        {!this.props.auth && <Auth {...this.props} />}
-        {this.props.auth && <Home order={this.props.order} signOff={this.props.signOff} navigation={this.props.navigation} />}
+        {this.props.loading && <Spinner />}
+        {this.props.auth === 1 && <Auth {...this.props} />}
+        {this.props.auth === 2 && <Home order={this.props.order} signOff={this.props.signOff} navigation={this.props.navigation} />}
       </View>
     );
   }

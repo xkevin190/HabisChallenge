@@ -11,6 +11,7 @@ import { toast } from '../utils/constants';
  * @param {callback} callback
  */
 export const logout = (data, callback) => (dispatch) => {
+  dispatch(loading(true))
   axios
     .post('https://order-pizza-api.herokuapp.com/api/auth', {
       password: data.password,
@@ -18,22 +19,22 @@ export const logout = (data, callback) => (dispatch) => {
     })
     .then(async (res) => {
       await AsyncStorage.setItem('token', res.data.access_token);
-      await getOrder()
       dispatch({
         type: ActionTypes.AUTH,
-        payload: true,
+        payload: 2,
       });
+      const order = await getOrder(dispatch);
+      dispatch({
+        type: ActionTypes.GET_ORDER,
+        payload: order.data
+      })
 
-      if (token) {
-        const order = await getOrder();
-        dispatch({
-          type: ActionTypes.GET_ORDER,
-          payload: order.data
-        })
-      }
+      dispatch(loading(false))
+
     })
     .catch((err) => {
-      callback(err.response.data.msg);
+      dispatch(loading(false))
+      errorMessage(err, dispatch)
     });
 
 };
@@ -42,19 +43,21 @@ export const logout = (data, callback) => (dispatch) => {
  * check that a user is logged in and execute the initial state
  */
 export const veryState = () => async (dispatch) => {
+  dispatch(loading(true))
   const token = await AsyncStorage.getItem('token');
   dispatch({
     type: ActionTypes.INITIAL_STATE,
-    payload: token ? true : false,
+    payload: token ? 2 : 1,
   });
 
   if (token) {
-    const order = await getOrder();
+    const order = await getOrder(dispatch);
     dispatch({
       type: ActionTypes.GET_ORDER,
       payload: order.data
     })
   }
+  dispatch(loading(false))
 };
 
 
@@ -69,6 +72,7 @@ export const veryState = () => async (dispatch) => {
  * @param {integer} order.Timestamp
  */
 export const createNewOrder = (order, callback) => async (dispatch) => {
+  dispatch(loading(true))
   const token = await AsyncStorage.getItem('token');
   axios({
     method: "POST",
@@ -80,17 +84,19 @@ export const createNewOrder = (order, callback) => async (dispatch) => {
       type: ActionTypes.CREATE_ORDER,
       payload: order
     })
+    dispatch(loading(false))
     callback()
-  }).catch(err => {
+  }).catch((err) => {
+    dispatch(loading(false))
     errorMessage(err, dispatch)
   })
 }
 
 const errorMessage = async (err, dispatch) => {
+
   if (err.response) {
     toast(err.response.data.msg)
     if (err.response.data.msg == 'Token has expired') {
-      console.log('entro aqui')
       dispatch(signOff())
     }
   } else {
@@ -98,9 +104,14 @@ const errorMessage = async (err, dispatch) => {
   }
 }
 
-export const getOrder = async () => {
-  const order = await axios.get('https://order-pizza-api.herokuapp.com/api/orders',)
-  return order;
+export const getOrder = async (dispatch) => {
+  try {
+    const order = await axios.get('https://order-pizza-api.herokuapp.com/api/orders',)
+    return order;
+  } catch (error) {
+    dispatch(loading(false))
+    errorMessage(error, dispatch)
+  }
 }
 
 /**
@@ -108,12 +119,17 @@ export const getOrder = async () => {
  * @param {string} id 
  */
 export const deleteOrder = (id, callback) => (dispatch) => {
+  dispatch(loading(true))
   axios.delete(`https://order-pizza-api.herokuapp.com/api/orders/${id}`).then(() => {
     dispatch({
       type: ActionTypes.DELETE_ORDER,
       payload: id
     })
     callback()
+    dispatch(loading(false))
+  }).catch((err) => {
+    dispatch(loading(false))
+    errorMessage(err, dispatch)
   })
 }
 
@@ -121,6 +137,14 @@ export const signOff = () => async (dispatch) => {
   await AsyncStorage.removeItem('token');
   dispatch({
     type: ActionTypes.INITIAL_STATE,
-    payload: false,
+    payload: 1,
   });
+}
+
+
+const loading = (loading) => {
+  return {
+    type: ActionTypes.LOADING,
+    payload: loading
+  }
 }
